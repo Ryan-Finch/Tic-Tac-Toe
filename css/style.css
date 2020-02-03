@@ -1,0 +1,79 @@
+*, *:before, *:after {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+:root{
+    --player1: red;
+    --player2: rgb(16, 35, 207);
+    --null: white;
+}
+.game-board {
+    display: grid;
+    grid-template-rows: 200px 200px 200px;
+    grid-template-columns: 200px 200px 200px;
+    align-content: center;
+}
+
+#board-setup{
+    align-items: center;
+    padding: 10vmax;
+}
+body {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+header {
+    background-color: blue;
+    color: black;
+    font-size: 5vmin;
+    padding: 2vmin;
+    text-align: center;
+    width: 100%;
+  }
+/* #player1{
+    align-content: center;
+    color: red;
+    display: inline-block;
+      
+    float: left;
+    padding-left: 15vh;
+  }
+#p1-msg{
+    align-content: center;
+    color: red;
+    
+    
+    padding-left: 15vh
+}
+#player2 {
+    text-align: right;
+    color: green;
+    display: inline-block;
+    float: right; 
+    padding-right: 15vh;
+  }
+#p2-msg{
+    text-align: right;
+    align-content: flex-end;
+    color: green;
+    display: block;
+    display: flexbox;
+    float: right; 
+    padding-right: 15vh;
+} */
+.box {
+    
+    border: 1px solid #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(39, 17, 17);
+}
+
+footer{
+    text-align: center;
+}
