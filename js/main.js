@@ -1,9 +1,9 @@
-//Constants
-// const colors = {
-//     null: 'var(--null)',
-//     player1:  'var(--player1)',
-//     player2: 'var(--player2)',
-// };
+// Constants
+const colors = {
+    'null': 'var(--null)',
+    '1':  'var(--player1)',
+    '-1': 'var(--player2)',
+};
 
 
 const winConditions =[
@@ -17,104 +17,84 @@ const winConditions =[
    [0,4,8]
 ];
 
-const usedSquares = []
-
-const board = [];
-
 //Varialbles
-
+let board = [];
 let playerTurn;
 let winLoseDraw;
-let player1 = 1;
-let player2 = -1;
-
 //Cached Elements 
 const squares = document.querySelectorAll('.box');
-let message = document.querySelector('.message');
+let message = document.querySelector('#message');
 //Event Listener
 for (let i = 0; i < squares.length; i++) {
     squares[i].addEventListener('click', squareSelection)
-}
+};
+ document.querySelector('button').addEventListener('click', init);
+
+
 
 //Functions
 init();
-
 function init(){
-    createBoard();
-    turn();
-    winner();
+    board = Array(9).fill(null);
+    playerTurn = 1;
+    winLoseDraw = null;
     render();
-    }
-
-function turn(){
-    
-    playerTurn = player1;
-
-
 }
 
 function winner(){
-    winLoseDraw = null;
-}
-
-function createBoard() {
-
-    for(let i = 0; i < squares.length; i++){
-        board[i] = squares[i];
+    for(let i = 0; i < winConditions.length; i++){
+        if(Math.abs(board[winConditions[i][0]] + board[winConditions[i][1]] + board[winConditions[i][2]]) === 3){
+            return board[winConditions[i][0]]
+        }
     }
+    if(board.includes(null)){
+        return null
+    }else{
+        return 'T'
+    }
+
 }
 
 function render(){
+
+    console.log(winLoseDraw)
+    board.forEach(function(sqr, i){
+        squares[i].style.background = colors[sqr];
+   })
     
-    if(winLoseDraw === null){
-        message =  `It's ${playerTurn} turn`;   
-    }else if(winLoseDraw === 'T'){
-        message = `It's a tie game!`;
-    }else{
-        message = `Congrats ${playerTurn}! You have won!`
+   if(winLoseDraw === null) {
+        return message.innerHTML =`It's Player ${playerTurn} turn`
     }
     
-}
-
-function getWinner(){
-    gameWon = null;
-    for(let [index, win] of winConditions.entries()){
-        if(win.every(elem => usedSquares.indexOf(elem > - 1))){
-            console.log('hhhhhh')
-        }
-    }
-            
-    
-
-
-
-}
-
-function squareSelection(e){
-
-    let target = document.querySelector('.box');
-    
-    if(e.target.style.background === 'red' || e.target.style.background === 'green'){
-        return
+    if(winLoseDraw === 'T') {
+        return message.innerHTML =`It's a Tie! Play again!`
     }
 
-    if(winLoseDraw !== null){
-        return
-    }
-    
-    // console.log(target)
-    if(playerTurn === player1){
-        e.target.style.background = 'red';
-        playerTurn = player2;
-    }else{
-        e.target.style.background= 'green';
-        playerTurn = player1;
+    if(winLoseDraw === 1){
+        return message.innerHTML = 'YO DAWG! You won this shit!'
+    }else if(winLoseDraw === -1){
+            return message.innerHTML = 'You get a win and you get a win!'
         }
     
-     usedSquares.push(e.target.id);  
-     
-     
-    getWinner();
+    
+    // return message.innerHTML = `Congrats Player ${winLoseDraw}! You win!`
+}
+
+function squareSelection(evt){
+    
+    let move = parseInt(evt.target.id.replace('sq', ''));
+
+    console.log(playerTurn)
+
+    if(board[move] !== null) return
+    
+
+
+    if(winLoseDraw !== null)return
+        
+    board[move] = playerTurn;  
+    winLoseDraw = winner();
+    playerTurn *= -1
     render();
-}
 
+}
