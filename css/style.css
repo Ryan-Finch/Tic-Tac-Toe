@@ -6,13 +6,13 @@
 :root{
     --player1: url(/img/xzbit.jpg);
     --player2: url(/img/Oprah-You-Get-A.jpg);
-    --null: white;
+    --null: rgba(39, 12, 12, 0.349);
 }
 .game-board {
   display: grid;
   grid-template-rows: 200px 200px 200px;
   grid-template-columns: 200px 200px 200px;
-    
+  margin-bottom: 10px;
 }
 
 #message{
@@ -20,7 +20,8 @@
 }
 
 #board-setup{
-  padding: 10vmax;
+  padding: 10px;
+  margin: 0;
 }
 #replay{
   margin-bottom: 70px;
@@ -34,14 +35,16 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
+  background-image: radial-gradient(yellow, red);
 }
 header {
-  background-color: blue;
+  background-image: radial-gradient(yellow, red);
   color: black;
   font-size: 5vmin;
   padding: 2vmin;
   text-align: center;
   width: 100%;
+
   }
 
 .box {
@@ -55,4 +58,10 @@ header {
 
 footer{
   text-align: center;
+  margin: 0;
+
+}
+
+img{
+  border-radius: 50%;
 }

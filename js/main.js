@@ -5,7 +5,6 @@ const colors = {
     '-1': 'var(--player2)',
 };
 
-
 const winConditions =[
    [0,1,2],
    [3,4,5],
@@ -18,22 +17,29 @@ const winConditions =[
 ];
 
 //Varialbles
+
 let board = [];
 let playerTurn;
 let winLoseDraw;
+let playerName1 = `'X'zibit`;
+let playerName2 = `'O'prah`;
 //Cached Elements 
+
 const squares = document.querySelectorAll('.box');
 let message = document.querySelector('#message');
+
 //Event Listener
+
 for (let i = 0; i < squares.length; i++) {
     squares[i].addEventListener('click', squareSelection)
 };
- document.querySelector('button').addEventListener('click', init);
+document.querySelector('button').addEventListener('click', init);
 
 
 
 //Functions
 init();
+
 function init(){
     board = Array(9).fill(null);
     playerTurn = 1;
@@ -57,14 +63,19 @@ function winner(){
 
 function render(){
 
-    console.log(winLoseDraw)
     board.forEach(function(sqr, i){
         squares[i].style.background = colors[sqr];
    })
     
    if(winLoseDraw === null) {
-        return message.innerHTML =`It's Player ${playerTurn} turn`
+       if(playerTurn === 1){
+        return message.innerHTML =`It's ${playerName1}'s turn`
+       }else{
+           return message.innerHTML =  `It's ${playerName2}'s turn`
+       }
     }
+
+    
     
     if(winLoseDraw === 'T') {
         return message.innerHTML =`It's a Tie! Play again!`
@@ -75,23 +86,14 @@ function render(){
     }else if(winLoseDraw === -1){
             return message.innerHTML = 'You get a win and you get a win!'
         }
-    
-    
-    // return message.innerHTML = `Congrats Player ${winLoseDraw}! You win!`
+
 }
 
 function squareSelection(evt){
     
     let move = parseInt(evt.target.id.replace('sq', ''));
-
-    console.log(playerTurn)
-
     if(board[move] !== null) return
-    
-
-
     if(winLoseDraw !== null)return
-        
     board[move] = playerTurn;  
     winLoseDraw = winner();
     playerTurn *= -1
