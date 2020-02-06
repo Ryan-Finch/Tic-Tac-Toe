@@ -36,7 +36,6 @@ for (let i = 0; i < squares.length; i++) {
 document.querySelector('button').addEventListener('click', init);
 
 
-
 //Functions
 init();
 
@@ -90,7 +89,7 @@ function render(){
 }
 
 function squareSelection(evt){
-    
+
     let move = parseInt(evt.target.id.replace('sq', ''));
     if(board[move] !== null) return
     if(winLoseDraw !== null)return
